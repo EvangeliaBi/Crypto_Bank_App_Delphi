@@ -1,0 +1,42 @@
+unit uSession;
+
+interface
+
+uses
+  uCurrentUser;
+
+procedure LogoutUser();
+
+implementation
+
+uses
+  uLogin, uDashboard, uAccount, uTransactions, uDeposit;
+
+procedure LogoutUser();
+begin
+  // Clear the current user session.
+  TCurrentUser.Clear;
+  // Clear Login Fields.
+  frmLogin.edtEmail.Text    := '';
+  frmLogin.edtPassword.Text := '';
+  // Reset the other forms.
+  frmDashboard.lblWelcome.Text := '';
+  frmDashboard.lblBalance.Text := '$0.00';
+  frmDashboard.ListViewCryptos.Items.Clear;
+
+  frmAccount.lblFName.Text         := '';
+  frmAccount.lblLName.Text         := '';
+  frmAccount.lblEmail.Text         := '';
+  frmAccount.edtBalanceAmount.Text := '$0.00';
+  // Hide Application forms.
+  frmAccount.Hide;
+  frmTransactions.Hide;
+  frmDeposit.Hide;
+  frmDashboard.Hide;
+  // Show Login.
+  frmLogin.Show;
+  // Clear Login fields.
+  frmLogin.ClearLoginFields;
+end;
+
+end.

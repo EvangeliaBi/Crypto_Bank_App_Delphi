@@ -1,0 +1,37 @@
+unit uTransactions;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation, FMX.ListView.Types, FMX.ListView.Appearances,
+  FMX.ListView.Adapters.Base, FMX.ListView;
+
+type
+  TfrmTransactions = class(TForm)
+    pnlTop: TPanel;
+    lblTitle: TLabel;
+    ListViewTransactions: TListView;
+  private
+    { Private declarations }
+    procedure LoadTransactions();
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTransactions: TfrmTransactions;
+
+implementation
+
+{$R *.fmx}
+
+{ TfrmTransactions }
+
+procedure TfrmTransactions.LoadTransactions;
+begin
+
+end;
+
+end.

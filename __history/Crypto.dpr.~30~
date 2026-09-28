@@ -1,0 +1,34 @@
+program Crypto;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uLogin in 'uLogin.pas' {frmLogin},
+  uDashboard in 'uDashboard.pas' {frmDashboard},
+  uDM in 'uDM.pas' {dmMain: TDataModule},
+  uCurrentUser in 'uCurrentUser.pas',
+  uTransactions in 'uTransactions.pas' {frmTransactions},
+  uDeposit in 'uDeposit.pas' {frmDeposit},
+  uAccount in 'uAccount.pas' {frmAccount},
+  uSession in 'uSession.pas',
+  uWithdraw in 'uWithdraw.pas' {frmWithdraw},
+  uAuditLog in 'uAuditLog.pas',
+  uChangePassword in 'uChangePassword.pas' {frmChangePassword},
+  uPasswordUtils in 'uPasswordUtils.pas',
+  uMarkets in 'uMarkets.pas' {frmMarkets};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmDashboard, frmDashboard);
+  Application.CreateForm(TdmMain, dmMain);
+  Application.CreateForm(TfrmTransactions, frmTransactions);
+  Application.CreateForm(TfrmDeposit, frmDeposit);
+  Application.CreateForm(TfrmAccount, frmAccount);
+  Application.CreateForm(TfrmWithdraw, frmWithdraw);
+  Application.CreateForm(TfrmChangePassword, frmChangePassword);
+  Application.CreateForm(TfrmMarkets, frmMarkets);
+  Application.Run;
+end.

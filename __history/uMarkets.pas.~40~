@@ -1,0 +1,93 @@
+unit uMarkets;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  //
+  uDM;
+
+type
+  TfrmMarkets = class(TForm)
+    pnlTop: TPanel;
+    lblTitle: TLabel;
+    ListViewMarkets: TListView;
+    btnBuy: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure btnBuyClick(Sender: TObject);
+  private
+    { Private declarations }
+    FMarketSymbols : TArray<string>;
+    FMarketPrice   : TArray<Double>;
+    //
+    procedure LoadMarkets();
+    procedure BuySellectedAsset();
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMarkets: TfrmMarkets;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmMarkets.btnBuyClick(Sender: TObject);
+begin
+  BuySellectedAsset();
+end;
+
+procedure TfrmMarkets.BuySellectedAsset;
+var
+  Index : Integer;
+begin
+
+end;
+
+procedure TfrmMarkets.FormShow(Sender: TObject);
+begin
+  LoadMarkets();
+end;
+
+procedure TfrmMarkets.LoadMarkets;
+var
+  Symbol, CryptoName : String;
+  Price : Double;
+  i : Integer;
+begin
+  i := 0;
+  //
+  ListViewMarkets.Items.Clear;
+  //
+  SetLength(FMarketSymbols, 0);
+  SetLength(FMarketPrice, 0);
+  //
+  dmMain.FDQueryCryptoPrices.Close;
+  dmMain.FDQueryCryptoPrices.SQL.Text := 'SELECT symbol, name, price, updated_at ' +
+                                          'FROM crypto_prices ' +
+                                          'ORDER BY symbol';
+  dmMain.FDQueryCryptoPrices.Open;
+  //
+  while not dmMain.FDQueryCryptoPrices.Eof do
+   begin
+     Symbol := dmMain.FDQueryCryptoPrices.FieldByName('symbol').AsString;
+     CryptoName := dmMain.FDQueryCryptoPrices.FieldByName('name').AsString;
+     Price := dmMain.FDQueryCryptoPrices.FieldByName('price').AsFloat;
+     //
+     SetLength(FMarketSymbols, i+1);
+     SetLength(FMarketPrice, i+1);
+     //
+     FMarketSymbols[i] := Symbol;
+     FMarketPrice[i] := Price;
+     //
+     ListViewMarkets.Items.Add.Text := CryptoName + ' (' + Symbol + ')' + ' $' + FormatFloat('#,##0.00', Price);
+     Inc(i);
+     dmMain.FDQueryCryptoPrices.Next;
+   end;
+end;
+
+end.

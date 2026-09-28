@@ -1,0 +1,76 @@
+object frmWithdraw: TfrmWithdraw
+  Left = 0
+  Top = 0
+  Caption = 'Withdraw Control Panel'
+  ClientHeight = 144
+  ClientWidth = 292
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTitleTop: TPanel
+    Align = Top
+    Size.Width = 292.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblWithdraw: TLabel
+      Align = Center
+      Size.Width = 103.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Withdraw Amount'
+      TabOrder = 1
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 292.000000000000000000
+    Size.Height = 114.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object lblBalance: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Available Balance:'
+      TabOrder = 1
+    end
+    object edtBalanceAmount: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 2
+      Position.X = 119.000000000000000000
+      Position.Y = 11.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lblAmountWithdraw: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 48.000000000000000000
+      Size.Width = 115.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Withdrawal Amount:'
+      TabOrder = 3
+    end
+    object Edit1: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Position.X = 119.000000000000000000
+      Position.Y = 43.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btnWithdraw: TButton
+      Position.X = 120.000000000000000000
+      Position.Y = 81.000000000000000000
+      TabOrder = 5
+      Text = 'Withdraw'
+      TextSettings.Trimming = None
+    end
+  end
+end

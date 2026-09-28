@@ -1,0 +1,42 @@
+unit uDM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.FMXUI.Wait,
+  Data.DB, FireDAC.Comp.Client, FireDAC.Phys.PG, FireDAC.Phys.PGDef,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet;
+
+type
+  TdmMain = class(TDataModule)
+    FDConnection1: TFDConnection;
+    FDQueryLogin: TFDQuery;
+    FDQueryWallet: TFDQuery;
+    FDQueryAssets: TFDQuery;
+    FDQueryTransactions: TFDQuery;
+    FDQueryDeposit: TFDQuery;
+    FDQueryWithdraw: TFDQuery;
+    FDQueryAuditLog: TFDQuery;
+    FDQueryUpdateProfile: TFDQuery;
+    FDQueryChangePassword: TFDQuery;
+    FDQueryCryptoPrices: TFDQuery;
+    FDQueryBuyCrypto: TFDQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmMain: TdmMain;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

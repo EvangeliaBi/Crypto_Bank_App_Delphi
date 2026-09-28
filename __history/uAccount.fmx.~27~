@@ -1,0 +1,153 @@
+object frmAccount: TfrmAccount
+  Left = 0
+  Top = 0
+  Caption = 'Account'
+  ClientHeight = 356
+  ClientWidth = 364
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object pnlTop: TPanel
+    Align = Top
+    Size.Width = 364.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblTitle: TLabel
+      Align = Center
+      Size.Width = 48.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Account'
+      TabOrder = 0
+    end
+  end
+  object lblProfile: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 38.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'PROFILE'
+    TabOrder = 1
+  end
+  object pnlProfile: TPanel
+    Position.X = 8.000000000000000000
+    Position.Y = 63.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 100.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object lblFName: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'First Name: '
+      TabOrder = 0
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 4
+        Position.X = 142.000000000000000000
+        Position.Y = -5.000000000000000000
+        Size.Width = 195.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object lblLName: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 65.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Last Name: '
+      TabOrder = 1
+    end
+    object lblEmail: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 72.000000000000000000
+      Size.Width = 310.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Email: '
+      TabOrder = 2
+      object Edit3: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 4
+        Position.X = 142.000000000000000000
+        Position.Y = -5.000000000000000000
+        Size.Width = 195.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object Edit2: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Position.X = 150.000000000000000000
+      Position.Y = 36.000000000000000000
+      Size.Width = 195.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object lblWallet: TLabel
+    Position.X = 8.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'WALLET'
+    TabOrder = 3
+  end
+  object pnlWallet: TPanel
+    Position.X = 8.000000000000000000
+    Position.Y = 209.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 70.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object lblBalance: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Balance:'
+      TabOrder = 0
+    end
+    object edtBalanceAmount: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Position.X = 8.000000000000000000
+      Position.Y = 33.000000000000000000
+      Size.Width = 335.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object btnTransactionsProfile: TButton
+    Position.X = 158.000000000000000000
+    Position.Y = 287.000000000000000000
+    TabOrder = 5
+    Text = 'Transactions'
+    TextSettings.Trimming = None
+    OnClick = btnTransactionsProfileClick
+  end
+  object btnLogOut: TButton
+    Position.X = 158.000000000000000000
+    Position.Y = 317.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    Text = 'Logout'
+    TextSettings.Trimming = None
+    OnClick = btnLogOutClick
+  end
+end

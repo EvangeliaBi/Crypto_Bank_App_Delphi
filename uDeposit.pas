@@ -1,0 +1,94 @@
+unit uDeposit;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Edit,
+  FMX.StdCtrls, FMX.Controls.Presentation,
+  //
+  uDM, uCurrentUser, uAuditLog;
+
+type
+  TfrmDeposit = class(TForm)
+    pnlTopTitle: TPanel;
+    lblDepositTitle: TLabel;
+    pnlCenter: TPanel;
+    edtAmount: TEdit;
+    btnDeposit: TButton;
+    procedure btnDepositClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDeposit: TfrmDeposit;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmDeposit.btnDepositClick(Sender: TObject);
+var
+  Amount : Double;
+begin
+  if Trim(edtAmount.Text) = '' then
+   begin
+     ShowMessage('Please enter a deposit amount!');
+     Exit;
+   end
+  else
+  begin
+    Amount := StrToFloat(edtAmount.Text);
+    //
+    if Amount <= 0 then
+     begin
+       ShowMessage('Deposit amount must be greater than 0.');
+       Exit;
+     end;
+    //
+   try
+     dmMain.FDConnection1.StartTransaction;
+    try
+      // Update the Wallet.
+      dmMain.FDQueryDeposit.Close;
+      dmMain.FDQueryDeposit.SQL.Text := 'UPDATE wallets ' +
+                                         'SET balance = balance + :amount ' +
+                                         'WHERE user_id = :user_id';
+      dmMain.FDQueryDeposit.ParamByName('amount').AsFloat := Amount;
+      dmMain.FDQueryDeposit.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      //
+      dmMain.FDQueryDeposit.ExecSQL;
+      // Insert the Transaction.
+      dmMain.FDQueryDeposit.Close;
+      dmMain.FDQueryDeposit.Params.Clear;
+      dmMain.FDQueryDeposit.SQL.Text := 'INSERT INTO transactions ' +
+                                        '(user_id, transaction_type, amount) ' +
+                                        'VALUES (:user_id, :type, :amount)';
+      dmMain.FDQueryDeposit.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      dmMain.FDQueryDeposit.ParamByName('type').AsString := 'DEPOSIT';
+      dmMain.FDQueryDeposit.ParamByName('amount').AsFloat := Amount;
+      //
+      dmMain.FDQueryDeposit.ExecSQL;
+      dmMain.FDConnection1.Commit;   // Everything was succeeded.
+      LogAudit(TCurrentUser.UserID, 'DEPOSIT', 'Deposit of $' + FormatFloat('#,##0.00', Amount));
+      ShowMessage('Deposit Successful!');
+      edtAmount.Text := '';
+      Close;
+    Except on E : Exception do
+     begin
+       dmMain.FDConnection1.Rollback;
+       ShowMessage('Deposit failed:  '+E.Message);
+     end;
+    end;
+   Except on E : Exception do
+    begin
+      ShowMessage('Database transaction error: ' + E.Message);
+     end;
+   end;
+  end;
+end;
+
+end.

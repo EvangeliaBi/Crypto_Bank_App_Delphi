@@ -1,0 +1,118 @@
+object frmDashboard: TfrmDashboard
+  Left = 0
+  Top = 0
+  Caption = 'Dashboard'
+  ClientHeight = 300
+  ClientWidth = 540
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object pnlTop: TPanel
+    Align = Top
+    Size.Width = 540.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblDashBoard: TLabel
+      Align = Center
+      Size.Width = 70.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Dashboard'
+      TabOrder = 1
+    end
+    object lblWelcome: TLabel
+      Position.X = 397.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 132.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 540.000000000000000000
+    Size.Height = 270.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object lblBalance: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 300.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Total Balance: '
+      TabOrder = 0
+    end
+    object ListViewCryptos: TListView
+      ItemAppearanceClassName = 'TListItemAppearance'
+      ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+      HeaderAppearanceClassName = 'TListHeaderObjects'
+      FooterAppearanceClassName = 'TListHeaderObjects'
+      Position.X = 8.000000000000000000
+      Position.Y = 58.000000000000000000
+      Size.Width = 433.000000000000000000
+      Size.Height = 204.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object btnTransactions: TButton
+      Position.X = 449.000000000000000000
+      Position.Y = 130.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Transactions'
+      TextSettings.Trimming = None
+      OnClick = btnTransactionsClick
+    end
+    object btnDeposit: TButton
+      Position.X = 449.000000000000000000
+      Position.Y = 58.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Deposit'
+      TextSettings.Trimming = None
+      OnClick = btnDepositClick
+    end
+    object btnAccount: TButton
+      Position.X = 449.000000000000000000
+      Position.Y = 166.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Account'
+      TextSettings.Trimming = None
+      OnClick = btnAccountClick
+    end
+    object btnWithdraw: TButton
+      Position.X = 449.000000000000000000
+      Position.Y = 94.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'Withdraw'
+      TextSettings.Trimming = None
+      OnClick = btnWithdrawClick
+    end
+    object lblPortfolioValue: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 33.000000000000000000
+      Size.Width = 297.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Portfolio Value: $0.00'
+      TabOrder = 8
+    end
+  end
+end

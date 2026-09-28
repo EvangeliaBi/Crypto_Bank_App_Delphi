@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2026/08/15 13:35:53.000.132,=C:\Users\euagg\OneDrive\Έγγραφα\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 13:37:27.000.359,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\CryptoBank.fmx=C:\Users\euagg\OneDrive\Έγγραφα\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2026/08/15 13:37:27.000.359,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\CryptoBank.pas=C:\Users\euagg\OneDrive\Έγγραφα\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 13:38:22.000.118,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Crypto.dproj=C:\Users\euagg\OneDrive\Έγγραφα\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2026/08/15 13:42:51.000.234,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uLogin.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\CryptoBank.fmx</Transaction>
+    <Transaction>2026/08/15 13:42:51.000.234,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uLogin.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\CryptoBank.pas</Transaction>
+    <Transaction>2026/08/15 14:26:54.000.288,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 14:27:52.000.793,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDashboard.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/08/15 14:27:52.000.793,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDashboard.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 15:40:24.000.574,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 15:40:41.000.538,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDM.dfm=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.dfm</Transaction>
+    <Transaction>2026/08/15 15:40:41.000.538,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDM.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 16:27:59.000.787,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/15 16:28:20.000.814,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uCurrentUser.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 10:40:04.000.540,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 10:40:27.000.420,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uTransactions.pas</Transaction>
+    <Transaction>2026/08/16 10:40:27.000.420,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uTransactions.fmx</Transaction>
+    <Transaction>2026/08/16 11:57:50.000.794,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 11:58:35.000.450,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDeposit.pas</Transaction>
+    <Transaction>2026/08/16 11:58:35.000.450,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uDeposit.fmx</Transaction>
+    <Transaction>2026/08/16 13:49:23.000.447,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 13:50:31.000.216,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uAccount.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/08/16 13:50:31.000.216,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uAccount.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 18:39:27.000.254,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 18:40:08.000.271,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSession.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/08/16 18:40:08.000.271,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSession.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 18:40:31.000.321,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSession.pas=</Transaction>
+    <Transaction>2026/08/16 18:41:41.000.256,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/16 18:41:50.000.572,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSession.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/17 19:04:52.000.712,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/17 19:05:20.000.815,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uWithdraw.fmx</Transaction>
+    <Transaction>2026/08/17 19:05:20.000.815,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uWithdraw.pas</Transaction>
+    <Transaction>2026/08/30 11:36:02.000.072,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/08/30 11:36:23.000.746,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uAuditLog.pas</Transaction>
+    <Transaction>2026/09/06 13:48:23.000.643,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/06 13:48:56.000.800,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uChangePassword.pas</Transaction>
+    <Transaction>2026/09/06 13:48:56.000.800,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uChangePassword.fmx</Transaction>
+    <Transaction>2026/09/13 12:58:33.000.900,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/13 12:58:50.000.601,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uPasswordUtils.pas</Transaction>
+    <Transaction>2026/09/19 17:50:25.000.264,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/19 17:51:14.000.121,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uMarkets.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/09/19 17:51:14.000.121,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uMarkets.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/19 18:38:27.000.863,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/19 18:39:40.000.587,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uBuyCrypto.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/09/19 18:39:40.000.587,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uBuyCrypto.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/21 20:59:40.000.642,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/21 20:59:54.000.938,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSellCrypto.fmx=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.fmx</Transaction>
+    <Transaction>2026/09/21 20:59:54.000.938,C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\uSellCrypto.pas=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+    <Transaction>2026/09/27 14:23:37.000.687,=C:\Users\euagg\OneDrive\Desktop\Crypto_Bank_App_Delphi\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

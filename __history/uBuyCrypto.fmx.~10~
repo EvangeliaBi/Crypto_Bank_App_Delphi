@@ -1,0 +1,102 @@
+object frmBuyCrypto: TfrmBuyCrypto
+  Left = 0
+  Top = 0
+  Caption = 'Buy Crypto Currencies'
+  ClientHeight = 352
+  ClientWidth = 400
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTop: TPanel
+    Align = Top
+    Size.Width = 400.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblBuyTitle: TLabel
+      Align = Center
+      Size.Width = 69.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'BUY CRYPTO'
+      TabOrder = 1
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 400.000000000000000000
+    Size.Height = 312.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object lblAssetCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Asset'
+      TabOrder = 1
+    end
+    object lblAsset: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 33.000000000000000000
+      TabOrder = 2
+    end
+    object lblPriceCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 72.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Current Price'
+      TabOrder = 3
+    end
+    object lblPrice: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 97.000000000000000000
+      Text = '$0.00'
+      TabOrder = 4
+    end
+    object lblQuantityCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 136.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Quantity'
+      TabOrder = 5
+    end
+    object edtQuantity: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 6
+      Position.X = 8.000000000000000000
+      Position.Y = 161.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lblTotalCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 208.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Estimated Cost'
+      TabOrder = 7
+    end
+    object lblTotal: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 233.000000000000000000
+      Text = '$0.00'
+      TabOrder = 8
+    end
+    object btnBuy: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 280.000000000000000000
+      TabOrder = 9
+      Text = 'Buy'
+      TextSettings.Trimming = None
+    end
+  end
+end

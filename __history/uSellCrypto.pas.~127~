@@ -1,0 +1,261 @@
+unit uSellCrypto;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation, FMX.Edit,
+  //
+  uDM, uCurrentUser, uAuditLog;
+
+type
+  TfrmSellCrypto = class(TForm)
+    pnlTop: TPanel;
+    lblSellTitle: TLabel;
+    pnlCenter: TPanel;
+    lblAssetCaption: TLabel;
+    lblAsset: TLabel;
+    lblPriceCaption: TLabel;
+    lblPrice: TLabel;
+    lblAvailableCaption: TLabel;
+    lblAvailable: TLabel;
+    lblQuantityCaption: TLabel;
+    edtQuantity: TEdit;
+    lblTotalCaption: TLabel;
+    lblTotal: TLabel;
+    btnSell: TButton;
+    procedure edtQuantityChange(Sender: TObject);
+    procedure btnSellClick(Sender: TObject);
+  private
+    { Private declarations }
+    FSelectedSymbol    : String;
+    FSelectedPrice     : Double;
+    FAvailableQuantity : Double;
+    //
+    procedure CalculateTotal();
+    procedure LoadAvailableQuantity();
+  public
+    { Public declarations }
+    procedure OpenForAsset(const ASymbol:String; const APrice:Double);
+  end;
+
+var
+  frmSellCrypto: TfrmSellCrypto;
+
+implementation
+
+{$R *.fmx}
+
+{ TfrmSellCrypto }
+
+procedure TfrmSellCrypto.btnSellClick(Sender: TObject);
+var
+  Quantity, CurrentPrice, TotalRevenue : Double;
+begin
+  // Quantity Validation.
+  if Trim(edtQuantity.Text) = '' then
+   begin
+     ShowMessage('Please enter a quantity.');
+     edtQuantity.SetFocus;
+     Exit;
+   end;
+  //
+  try
+    Quantity := StrToFloat(edtQuantity.Text);
+  Except on E:Exception do
+    begin
+      ShowMessage('Please enter a valid numeric value for the quantity!');
+      edtQuantity.SetFocus;
+      Exit;
+    end;
+  end;
+  //
+  if Quantity <= 0 then
+   begin
+     ShowMessage('Quantity must be greater than 0!');
+     edtQuantity.SetFocus;
+     Exit;
+   end;
+  //
+  try
+    dmMain.FDConnection1.StartTransaction;
+    //
+    try
+      // Get the current market price.
+      dmMain.FDQuerySellCrypto.Close;
+      dmMain.FDQuerySellCrypto.SQL.Text := 'SELECT price ' +
+                                            'FROM crypto_prices ' +
+                                            'WHERE symbol = :symbol';
+      dmMain.FDQuerySellCrypto.ParamByName('symbol').AsString := FSelectedSymbol;
+      dmMain.FDQuerySellCrypto.Open;
+      //
+      if dmMain.FDQuerySellCrypto.IsEmpty then
+       begin
+         dmMain.FDConnection1.Rollback;
+         //
+         ShowMessage('Cryptocurrency price not found.');
+         Exit;
+       end;
+      //
+      CurrentPrice := dmMain.FDQuerySellCrypto.FieldByName('price').AsFloat;
+      //
+      {Calculate the Revenue.}
+      TotalRevenue := Quantity * CurrentPrice;
+      //
+      {Reduce user's asset quantity}
+      dmMain.FDQuerySellCrypto.Close;
+      dmMain.FDQuerySellCrypto.SQL.Text := 'UPDATE assets ' +
+                                           'SET quantity = quantity - :quantity ' +
+                                           'WHERE user_id = :user_id ' +
+                                           'AND symbol = :symbol ' +
+                                           'AND quantity = :quantity';
+      dmMain.FDQuerySellCrypto.ParamByName('quantity').AsFloat := Quantity;
+      dmMain.FDQuerySellCrypto.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      dmMain.FDQuerySellCrypto.ParamByName('symbol').AsString := FSelectedSymbol;
+      dmMain.FDQuerySellCrypto.ExecSQL;
+      //
+      {Check if the asset was updated.}
+      if dmMain.FDQuerySellCrypto.RowsAffected = 0 then
+       begin
+         dmMain.FDConnection1.Rollback;
+         //
+         ShowMessage('Insufficient asset quantity.');
+         Exit;
+       end;
+      //
+      {Add money to wallet.}
+      dmMain.FDQuerySellCrypto.Close;
+      dmMain.FDQuerySellCrypto.SQL.Text := 'UPDATE wallets ' +
+                                            'SET balance = balance + :amount ' +
+                                            'WHERE user_id = :user_id';
+      dmMain.FDQuerySellCrypto.ParamByName('amount').AsFloat := TotalRevenue;
+      dmMain.FDQuerySellCrypto.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      dmMain.FDQuerySellCrypto.ExecSQL;
+      //
+      if dmMain.FDQuerySellCrypto.RowsAffected = 0 then
+       begin
+         dmMain.FDConnection1.Rollback;
+         //
+         ShowMessage('Unable to update wallet balance.');
+         Exit;
+       end;
+      //
+      {Remove zero-quantity asset.}
+      dmMain.FDQuerySellCrypto.Close;
+      dmMain.FDQuerySellCrypto.SQL.Text := 'DELETE FROM assets ' +
+                                            'WHERE user_id = :user_id ' +
+                                            'AND symbol = :symbol ' +
+                                            'AND quantity = 0';
+      dmMain.FDQuerySellCrypto.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      dmMain.FDQuerySellCrypto.ParamByName('symbol').AsString := FSelectedSymbol;
+      dmMain.FDQuerySellCrypto.ExecSQL;
+      //
+      {Insert transaction history.}
+      dmMain.FDQuerySellCrypto.Close;
+      dmMain.FDQuerySellCrypto.SQL.Text := 'INSERT INTO transactions ' +
+                                            '(user_id, transaction_type, asset_symbol, amount) ' +
+                                            'VALUES (:user_id, :transaction_type, :asset_symbol, :amount)';
+      dmMain.FDQuerySellCrypto.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+      dmMain.FDQuerySellCrypto.ParamByName('transaction_type').AsString := 'SELL';
+      dmMain.FDQuerySellCrypto.ParamByName('asset_symbol').AsString := FSelectedSymbol;
+      dmMain.FDQuerySellCrypto.ParamByName('amount').AsFloat := TotalRevenue;
+      dmMain.FDQuerySellCrypto.ExecSQL;
+      //
+      {Commit in the database.}
+      dmMain.FDConnection1.Commit;
+      //
+      {Audit Logs}
+      LogAudit(TCurrentUser.UserID, 'SELL', 'Sold ' + FormatFloat('#,##0.########', Quantity) + ' ' + FSelectedSymbol + ' for $' + FormatFloat('#,##0.00', TotalRevenue));
+      ShowMessage('Sale completed successfully.');
+      edtQuantity.Text := '';
+      lblTotal.Text := '$0.00';
+      Close;
+     //
+    Except on E:Exception do
+      begin
+        dmMain.FDConnection1.Rollback;
+        //
+        ShowMessage('Sale failed: ' + E.Message);
+      end;
+    end;
+  //
+  Except on E:Exception do
+    begin
+
+    end;
+  end;
+end;
+
+procedure TfrmSellCrypto.CalculateTotal;   // Calculate the estimated Revenue.
+var
+  Quantity : Double;
+  Total : Double;
+begin
+  lblTotal.Text := '$0.00';
+  //
+  if Trim(edtQuantity.Text) = '' then
+   begin
+     Exit;
+   end;
+  //
+  try
+    Quantity := StrToFloat(edtQuantity.Text);
+  Except on E:Exception do
+    begin
+      Exit;
+    end;
+  end;
+  //
+  if Quantity <= 0 then
+   begin
+     Exit;
+   end;
+  //
+  Total := Quantity * FSelectedPrice;
+  lblTotal.Text := '$' + FormatFloat('#,##0.00', Total);
+end;
+
+procedure TfrmSellCrypto.edtQuantityChange(Sender: TObject);
+begin
+  self.CalculateTotal;
+end;
+
+procedure TfrmSellCrypto.LoadAvailableQuantity;  // Load the available quantity and use the table assets.
+begin
+  self.FAvailableQuantity := 0;
+  //
+  dmMain.FDQueryAssets.Close;
+  dmMain.FDQueryAssets.SQL.Text := 'SELECT quantity ' +
+                                   'FROM assets ' +
+                                   'WHERE user_id = :user_id ' +
+                                   'AND symbol = :symbol';
+  dmMain.FDQueryAssets.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+  dmMain.FDQueryAssets.ParamByName('symbol').AsString := FSelectedSymbol;
+  dmMain.FDQueryAssets.Open;
+  //
+  if not dmMain.FDQueryAssets.IsEmpty then
+   begin
+     FAvailableQuantity := dmMain.FDQueryAssets.FieldByName('quantity').AsFloat;
+   end;
+  //
+  lblAvailable.Text := FormatFloat('#,##0.########', FAvailableQuantity) + ' ' + FSelectedSymbol;
+end;
+
+procedure TfrmSellCrypto.OpenForAsset(const ASymbol: String; const APrice: Double);
+begin
+  self.FSelectedSymbol := ASymbol;
+  self.FSelectedPrice  := APrice;
+  //
+  lblAsset.Text := FSelectedSymbol;
+  lblPrice.Text := '$' + FormatFloat('#,##0.00', FSelectedPrice);
+  //
+  edtQuantity.Text := '';
+  lblTotal.Text := '$0.00';
+  //
+  LoadAvailableQuantity;  // Call this procedure.
+  //
+  Show;
+end;
+
+end.

@@ -1,0 +1,92 @@
+object frmLogin: TfrmLogin
+  Left = 0
+  Top = 0
+  Caption = 'Crypto Bank'
+  ClientHeight = 264
+  ClientWidth = 400
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTitleTop: TPanel
+    Align = Top
+    Size.Width = 400.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblTitle: TLabel
+      Align = Center
+      Size.Width = 70.000000000000000000
+      Size.Height = 20.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Crypto Bank'
+      TabOrder = 1
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 400.000000000000000000
+    Size.Height = 214.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object lblEmail: TLabel
+      Position.X = 46.000000000000000000
+      Position.Y = 69.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Email:'
+      TabOrder = 1
+    end
+    object edtEmail: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Position.X = 112.000000000000000000
+      Position.Y = 64.000000000000000000
+      Size.Width = 260.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'Email'
+    end
+    object lblPassword: TLabel
+      Position.X = 46.000000000000000000
+      Position.Y = 99.000000000000000000
+      Size.Width = 58.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Password:'
+      TabOrder = 4
+    end
+    object edtPassword: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 5
+      Password = True
+      Position.X = 112.000000000000000000
+      Position.Y = 94.000000000000000000
+      Size.Width = 260.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'Password'
+    end
+    object btnLogin: TButton
+      Position.X = 112.000000000000000000
+      Position.Y = 136.000000000000000000
+      Size.Width = 60.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'Login'
+      TextSettings.Trimming = None
+      OnClick = btnLoginClick
+    end
+    object Button1: TButton
+      Position.X = 232.000000000000000000
+      Position.Y = 136.000000000000000000
+      TabOrder = 8
+      Text = 'Button1'
+      TextSettings.Trimming = None
+      OnClick = Button1Click
+    end
+  end
+end

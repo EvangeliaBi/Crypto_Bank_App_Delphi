@@ -1,0 +1,14 @@
+unit uCurrentUser;
+
+interface
+
+type
+  TCurrentUser = class
+    public
+      class var UserID : Integer;
+
+  end;
+
+implementation
+
+end.

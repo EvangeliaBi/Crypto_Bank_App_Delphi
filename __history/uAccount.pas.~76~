@@ -1,0 +1,178 @@
+unit uAccount;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
+  //
+  uCurrentUser, uDM, uTransactions, uSession;
+
+type
+  TfrmAccount = class(TForm)
+    pnlTop: TPanel;
+    lblTitle: TLabel;
+    lblProfile: TLabel;
+    pnlProfile: TPanel;
+    lblWallet: TLabel;
+    pnlWallet: TPanel;
+    lblFName: TLabel;
+    lblLName: TLabel;
+    lblEmail: TLabel;
+    lblBalance: TLabel;
+    edtBalanceAmount: TEdit;
+    btnTransactionsProfile: TButton;
+    btnLogOut: TButton;
+    edtFirstName: TEdit;
+    edtLastName: TEdit;
+    edtEmail: TEdit;
+    btnEditProfile: TButton;
+    btnSaveChanges: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure btnTransactionsProfileClick(Sender: TObject);
+    procedure btnLogOutClick(Sender: TObject);
+    procedure btnEditProfileClick(Sender: TObject);
+    procedure btnSaveChangesClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure LoadUserData;
+    procedure LoadWallet;
+    procedure SetEditMode(const AEnabled : Boolean);
+    //
+    function EmailIsValid(const AEmail : String) : Boolean;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmAccount: TfrmAccount;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmAccount.btnEditProfileClick(Sender: TObject);
+begin
+  SetEditMode(True);
+end;
+
+procedure TfrmAccount.btnLogOutClick(Sender: TObject);
+begin
+  LogoutUser;
+end;
+
+procedure TfrmAccount.btnSaveChangesClick(Sender: TObject);
+var
+  FirstName : String;
+  LastName  : String;
+  Email     : String;
+begin
+  FirstName := Trim(edtFirstName.Text);
+  LastName  := Trim(edtLastName.Text);
+  Email     := Trim(edtEmail.Text);
+  //
+  {First Name Validation}
+  if FirstName = '' then
+   begin
+     ShowMessage('Please enter your First Name.');
+     edtFirstName.SetFocus;
+     Exit;
+   end;
+  //
+  {Last Name Validation}
+  if LastName = '' then
+   begin
+     ShowMessage('Please enter your Last Name.');
+     edtLastName.SetFocus;
+     Exit;
+   end;
+  //
+  {Email Validation}
+  if Email = '' then
+   begin
+     ShowMessage('Please enter your Email.');
+     edtEmail.SetFocus;
+     Exit;
+   end;
+  if not EmailIsValid(Email) then
+   begin
+     ShowMessage('Please enter a valid email address');
+     edtEmail.SetFocus;
+     Exit;
+   end;
+  //
+  try
+    dmMain.FDQueryUpdateProfile.Close;
+    dmMain.FDQueryUpdateProfile.SQL.Text := 'UPDATE users ' +
+                                            'SET first_name = :first_name, ' +
+                                            'last_name = :last_name, ' +
+                                            'email = :email ' +
+                                            'WHERE id = :user_id';
+    dmMain.FDQueryUpdateProfile.ParamByName('first_name').AsString := FirstName;
+    dmMain.FDQueryUpdateProfile.ParamByName('last_name').AsString := LastName;
+    dmMain.FDQueryUpdateProfile.ParamByName('email').AsString := Email;
+    dmMain.FDQueryUpdateProfile.ParamByName('user_id').AsString := TCurrentUser.UserID;
+  Except on E : Exception do
+    begin
+
+    end;
+  end;
+end;
+
+procedure TfrmAccount.btnTransactionsProfileClick(Sender: TObject);
+begin
+  frmTransactions.Show;
+end;
+
+function TfrmAccount.EmailIsValid(const AEmail: String): Boolean;
+begin
+  Result := (Pos('@', AEmail) > 1) and (Pos('.', AEmail, Pos('@', AEmail) + 1) > 0);
+end;
+
+procedure TfrmAccount.FormShow(Sender: TObject);
+begin
+  LoadUserData;
+  LoadWallet;
+  //
+  SetEditMode(False);
+end;
+
+procedure TfrmAccount.LoadUserData;
+begin
+  edtFirstName.Text := TCurrentUser.FirstName;
+  edtLastName.Text := TCurrentUser.LastName;
+  edtEmail.Text := TCurrentUser.Email;
+end;
+
+procedure TfrmAccount.LoadWallet;
+begin
+  dmMain.FDQueryWallet.Close;
+  //
+  dmMain.FDQueryWallet.SQL.Text := 'SELECT balance ' +
+                                   'FROM wallets ' +
+                                   'WHERE user_id = :user_id';
+  dmMain.FDQueryWallet.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+  dmMain.FDQueryWallet.Open;
+  //
+  if not dmMain.FDQueryWallet.IsEmpty then
+   begin
+     edtBalanceAmount.Text := '$' + FormatFloat('#,##0.00', dmMain.FDQueryWallet.FieldByName('balance').AsFloat);
+   end
+  else
+   begin
+     edtBalanceAmount.Text := '$0.00';
+   end;
+end;
+
+procedure TfrmAccount.SetEditMode(const AEnabled: Boolean);
+begin
+  edtFirstName.ReadOnly := not AEnabled;
+  edtLastName.ReadOnly := not AEnabled;
+  edtEmail.ReadOnly := not AEnabled;
+  //
+  btnEditProfile.Visible := not AEnabled;
+  btnSaveChanges.Visible := AEnabled;
+end;
+
+end.

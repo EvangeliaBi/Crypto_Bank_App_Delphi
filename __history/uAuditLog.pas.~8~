@@ -1,0 +1,24 @@
+unit uAuditLog;
+
+interface
+
+procedure LogAudit(const AUserID : Integer; const AAction : string; const ADescription : string);
+
+implementation
+
+uses
+ uDM;
+
+procedure LogAudit(const AUserID : Integer; const AAction : string; const ADescription : string);
+  begin
+    if AUserID <= 0 then
+     begin
+       Exit;
+     end;
+    //
+    dmMain.FDQueryAuditLog.Close;
+
+  end;
+
+
+end.

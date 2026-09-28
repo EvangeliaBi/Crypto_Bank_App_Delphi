@@ -1,0 +1,17 @@
+unit uPasswordUtils;
+
+interface
+
+function HashPassword(const APassword : string): string;
+
+implementation
+
+uses
+  System.Hash;
+
+function HashPassword(const APassword : string): string;
+  begin
+    Result := THashSHA2.GetHashString(APassword);
+  end;
+
+end.

@@ -1,0 +1,47 @@
+object frmDeposit: TfrmDeposit
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 176
+  ClientWidth = 248
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTopTitle: TPanel
+    Align = Top
+    Size.Width = 248.000000000000000000
+    Size.Height = 35.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblDepositTitle: TLabel
+      Align = Center
+      Text = 'Deposit Control Panel'
+      TabOrder = 1
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 248.000000000000000000
+    Size.Height = 141.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object edtAmount: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Position.X = 64.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btnDeposit: TButton
+      Position.X = 88.000000000000000000
+      Position.Y = 70.000000000000000000
+      TabOrder = 3
+      Text = 'Deposit'
+      TextSettings.Trimming = None
+    end
+  end
+end

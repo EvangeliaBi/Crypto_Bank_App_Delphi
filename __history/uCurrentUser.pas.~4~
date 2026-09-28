@@ -1,0 +1,31 @@
+unit uCurrentUser;
+
+interface
+
+type
+  TCurrentUser = class
+    public
+      class var UserID    : Integer;
+      class var Email     : String;
+      class var FirstName : String;
+      class var LastName  : String;
+
+      class procedure Clear; static;
+      class function IsLoggedIn : Boolean; static;
+  end;
+
+implementation
+
+{ TCurrentUser }
+
+class procedure TCurrentUser.Clear;
+begin
+
+end;
+
+class function TCurrentUser.IsLoggedIn: Boolean;
+begin
+
+end;
+
+end.

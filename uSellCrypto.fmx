@@ -1,0 +1,129 @@
+object frmSellCrypto: TfrmSellCrypto
+  Left = 0
+  Top = 0
+  Caption = 'Sell Crypto Currencies'
+  ClientHeight = 384
+  ClientWidth = 400
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTop: TPanel
+    Align = Top
+    Size.Width = 400.000000000000000000
+    Size.Height = 38.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lblSellTitle: TLabel
+      Align = Center
+      Size.Width = 69.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Sell Crypto'
+      TabOrder = 0
+    end
+  end
+  object pnlCenter: TPanel
+    Align = Client
+    Size.Width = 400.000000000000000000
+    Size.Height = 346.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblAssetCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 41.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Asset'
+      TabOrder = 0
+    end
+    object lblAsset: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 33.000000000000000000
+      TabOrder = 1
+    end
+    object lblPriceCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 68.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Current Price'
+      TabOrder = 2
+    end
+    object lblPrice: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 93.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = '$0.00'
+      TabOrder = 3
+    end
+    object lblAvailableCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 128.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Available Quantity'
+      TabOrder = 4
+    end
+    object lblAvailable: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 153.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = '0'
+      TabOrder = 5
+    end
+    object lblQuantityCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 188.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Quantity to Sell'
+      TabOrder = 6
+    end
+    object edtQuantity: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 7
+      Position.X = 8.000000000000000000
+      Position.Y = 213.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      OnChange = edtQuantityChange
+    end
+    object lblTotalCaption: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 253.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Estimated Revenue'
+      TabOrder = 8
+    end
+    object lblTotal: TLabel
+      Position.X = 8.000000000000000000
+      Position.Y = 278.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = '$0.00'
+      TabOrder = 9
+    end
+    object btnSell: TButton
+      Position.X = 8.000000000000000000
+      Position.Y = 313.000000000000000000
+      TabOrder = 10
+      Text = 'SELL'
+      TextSettings.Trimming = None
+      OnClick = btnSellClick
+    end
+  end
+end

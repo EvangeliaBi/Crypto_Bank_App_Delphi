@@ -1,0 +1,32 @@
+object frmTransactions: TfrmTransactions
+  Left = 0
+  Top = 0
+  Caption = 'frmTransactions'
+  ClientHeight = 348
+  ClientWidth = 400
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object pnlTop: TPanel
+    Align = Top
+    Size.Width = 400.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object lblTitle: TLabel
+      Align = Center
+      Text = 'Transaction History'
+      TabOrder = 1
+    end
+  end
+  object ListViewTransactions: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Position.X = 144.000000000000000000
+    Position.Y = 80.000000000000000000
+    TabOrder = 2
+  end
+end

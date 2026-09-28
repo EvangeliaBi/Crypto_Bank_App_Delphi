@@ -1,0 +1,16 @@
+unit uCurrentUser;
+
+interface
+
+type
+  TCurrentUser = class
+    public
+      class var UserID    : Integer;
+      class var Email     : String;
+      class var FirstName : String;
+      class var LastName  : String;
+  end;
+
+implementation
+
+end.

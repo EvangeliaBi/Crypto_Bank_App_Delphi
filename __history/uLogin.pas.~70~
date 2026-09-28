@@ -1,0 +1,98 @@
+unit uLogin;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
+  //
+  uDashboard, uDM, uCurrentUser, uAuditLog, uPasswordUtils;
+
+type
+  TfrmLogin = class(TForm)
+    lblTitle: TLabel;
+    pnlTitleTop: TPanel;
+    pnlCenter: TPanel;
+    lblEmail: TLabel;
+    edtEmail: TEdit;
+    lblPassword: TLabel;
+    edtPassword: TEdit;
+    btnLogin: TButton;
+    procedure btnLoginClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure ClearLoginFields();
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmLogin.btnLoginClick(Sender: TObject);
+var
+  EnteredPasswordHash : String;
+  StoredPasswordHash  : String;
+begin
+  try
+    dmMain.FDQueryLogin.Close;
+    dmMain.FDQueryLogin.SQL.Text := 'SELECT id, email, first_name, last_name, password_hash ' +
+                                    'FROM users ' +
+                                    'WHERE email = :email';
+    //
+    dmMain.FDQueryLogin.ParamByName('email').AsString := edtEmail.Text;
+    dmMain.FDQueryLogin.Open;
+    //
+       ShowMessage(HashPassword('123456'));
+    //
+    if dmMain.FDQueryLogin.IsEmpty then
+     begin
+       ShowMessage('Wrong Username or Password!');
+       Exit;
+     end;
+    {Hash password entered by the user}
+    EnteredPasswordHash := HashPassword(edtPassword.Text);
+    {Get stored hash from database}
+    StoredPasswordHash := dmMain.FDQueryLogin.FieldByName('password_hash').AsString;
+    {Compare hashes}
+    if EnteredPasswordHash <> StoredPasswordHash then
+     begin
+       ShowMessage('Wrong Username or Password!');
+       Exit;
+     end;
+    //
+    {Successful Login}
+    if not dmMain.FDQueryLogin.IsEmpty then
+     begin
+       TCurrentUser.UserID    := dmMain.FDQueryLogin.FieldByName('id').AsInteger;
+       TCurrentUser.Email     := dmMain.FDQueryLogin.FieldByName('email').AsString;
+       TCurrentUser.FirstName := dmMain.FDQueryLogin.FieldByName('first_name').AsString;
+       TCurrentUser.LastName  := dmMain.FDQueryLogin.FieldByName('last_name').AsString;
+       //
+       {Audit Log}
+       LogAudit(TCurrentUser.UserID, 'LOGIN', 'User logged in successfully.');
+       //
+       LogAudit(TCurrentUser.UserID, 'LOGOUT', 'User logged out');
+       //
+       frmDashBoard.Show;
+     end;
+  Except on E : Exception do
+     begin
+       ShowMessage('Something went wrong. '+E.Message);
+     end;
+  end;
+end;
+
+procedure TfrmLogin.ClearLoginFields;
+begin
+  edtEmail.Text    := '';
+  edtPassword.Text := '';
+  edtEmail.SetFocus;
+end;
+
+end.

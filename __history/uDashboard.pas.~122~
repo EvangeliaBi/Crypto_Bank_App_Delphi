@@ -1,0 +1,197 @@
+unit uDashboard;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  //
+  uCurrentUser, uDM, uTransactions, uDeposit, uAccount, uWithdraw, uMarkets, uSellCrypto;
+
+type
+  TfrmDashboard = class(TForm)
+    pnlTop: TPanel;
+    lblDashBoard: TLabel;
+    pnlCenter: TPanel;
+    lblBalance: TLabel;
+    ListViewCryptos: TListView;
+    lblWelcome: TLabel;
+    btnTransactions: TButton;
+    btnDeposit: TButton;
+    btnAccount: TButton;
+    btnWithdraw: TButton;
+    lblPortfolioValue: TLabel;
+    btnMarkets: TButton;
+    btnSell: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure btnTransactionsClick(Sender: TObject);
+    procedure btnDepositClick(Sender: TObject);
+    procedure btnAccountClick(Sender: TObject);
+    procedure btnWithdrawClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure btnMarketsClick(Sender: TObject);
+    procedure btnSellClick(Sender: TObject);
+  private
+    { Private declarations }
+    FAssetSymbols : TArray<String>;
+    FAssetPrices  : TArray<Double>;
+    //
+    procedure LoadWallet();
+    procedure LoadAssets();
+    procedure RefreshDashboard();
+    procedure SellSelectedAsset();
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDashboard: TfrmDashboard;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmDashboard.btnAccountClick(Sender: TObject);
+begin
+  frmAccount.Show;
+end;
+
+procedure TfrmDashboard.btnDepositClick(Sender: TObject);
+begin
+  frmDeposit.Show;
+end;
+
+procedure TfrmDashboard.btnMarketsClick(Sender: TObject);
+begin
+  frmMarkets.Show;
+end;
+
+procedure TfrmDashboard.btnSellClick(Sender: TObject);
+begin
+  SellSelectedAsset;
+end;
+
+procedure TfrmDashboard.btnTransactionsClick(Sender: TObject);
+begin
+  frmTransactions.Show;
+end;
+
+procedure TfrmDashboard.btnWithdrawClick(Sender: TObject);
+begin
+  frmWithdraw.Show;
+end;
+
+procedure TfrmDashboard.FormActivate(Sender: TObject);
+begin
+  RefreshDashboard();
+end;
+
+procedure TfrmDashboard.FormShow(Sender: TObject);
+begin
+  RefreshDashboard();
+end;
+
+procedure TfrmDashboard.LoadAssets;
+var
+  Symbol, CryptoName : String;
+  Quantity, Price, AssetValue, TotalPortfolioValue : Double;
+  i : Integer;
+begin
+  TotalPortfolioValue := 0;
+  i := 0;
+  SetLength(FAssetSymbols, 0);
+  SetLength(FAssetPrices, 0);
+  //
+  ListViewCryptos.Items.Clear;
+  dmMain.FDQueryAssets.Close;
+  dmMain.FDQueryAssets.SQL.Text := 'SELECT ' +
+                                    'a.symbol, a.quantity, c.name, c.price, ' +
+                                    '(a.quantity * c.price) AS asset_value ' +
+                                    'FROM assets a ' +
+                                    'INNER JOIN crypto_prices c ' +
+                                    'ON a.symbol = c.symbol ' +
+                                    'WHERE a.user_id = :user_id ' +
+                                    'ORDER BY a.symbol';
+  //
+  dmMain.FDQueryAssets.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+  dmMain.FDQueryAssets.Open;
+  //
+  while not dmMain.FDQueryAssets.Eof do
+    begin
+      Symbol     := dmMain.FDQueryAssets.FieldByName('symbol').AsString;
+      CryptoName := dmMain.FDQueryAssets.FieldByName('name').AsString;
+      Quantity   := dmMain.FDQueryAssets.FieldByName('quantity').AsFloat;
+      Price      := dmMain.FDQueryAssets.FieldByName('price').AsFloat;
+      AssetValue := dmMain.FDQueryAssets.FieldByName('asset_value').AsFloat;
+      //
+      SetLength(FAssetSymbols, i+1);
+      SetLength(FAssetPrices, i+1);
+      FAssetSymbols[i] := Symbol;
+      FAssetPrices[i] := Price;
+      //
+      TotalPortfolioValue := TotalPortfolioValue + AssetValue;
+      ListViewCryptos.Items.Add.Text := Symbol + ' - ' +
+                                        CryptoName + ' | Qty: ' +
+                                        FormatFloat('#,##0.########', Quantity) +
+                                        ' | Price: $' +
+                                        FormatFloat('#,##0.00', Price) +
+                                        ' | Value: $' +
+                                        FormatFloat('#,##0.00', AssetValue);
+      //
+      Inc(i);
+      dmMain.FDQueryAssets.Next;
+    end;
+  //
+  lblPortfolioValue.Text := 'Portfolio Value: $' + FormatFloat('#,##0.00', TotalPortfolioValue);
+end;
+
+procedure TfrmDashboard.LoadWallet;
+begin
+  dmMain.FDQueryWallet.Close;
+  //
+  dmMain.FDQueryWallet.SQL.Clear;
+  dmMain.FDQueryWallet.SQL.Text := 'SELECT balance ' +
+                                   'FROM wallets ' +
+                                   'WHERE user_id = :user_id';
+  dmMain.FDQueryWallet.ParamByName('user_id').AsInteger := TCurrentUser.UserID;
+  dmMain.FDQueryWallet.Open;
+  //
+  if not dmMain.FDQueryWallet.IsEmpty then
+   begin
+     lblBalance.Text := 'Total Balance: $' + FormatFloat('#,##0.00', dmMain.FDQueryWallet.FieldByName('balance').AsFloat);
+   end
+  else
+   begin
+     lblBalance.Text := 'Total Balance: $0.00';
+   end;
+end;
+
+procedure TfrmDashboard.RefreshDashboard;
+begin
+  if not TCurrentUser.IsLoggedIn then
+   begin
+     Exit;
+   end;
+  //
+  lblWelcome.Text := 'Welcome, ' + TCurrentUser.FirstName;
+  //
+  LoadWallet;
+  LoadAssets;
+end;
+
+procedure TfrmDashboard.SellSelectedAsset;
+var
+  Index : Integer;
+begin
+  Index := ListViewCryptos.ItemIndex;
+  //
+  if Index < 0 then
+   begin
+     ShowMessage('Please select a cryptocurrency first.');
+     Exit;
+   end;
+end;
+
+end.
